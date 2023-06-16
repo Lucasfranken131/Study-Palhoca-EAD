@@ -16,12 +16,18 @@ class Tela{
         //Footer e itens do footer
         JMenuBar menu = new JMenuBar();
         JMenu inserir = new JMenu("Inserir");
+        JMenu editar = new JMenu("Editar");
         menu.add(inserir);
+        menu.add(editar);
         frame.add(menu);
         JMenuItem cidade = new JMenuItem("Inserir Cidade");
         JMenuItem aluno = new JMenuItem("Inserir Aluno");
         inserir.add(cidade);
         inserir.add(aluno);
+        JMenuItem cidade_editar = new JMenuItem("Editar Cidade");
+        JMenuItem aluno_editar = new JMenuItem("Editar Aluno");
+        editar.add(cidade_editar);
+        editar.add(aluno_editar);
 
         //Posicionamento do footer
         frame.getContentPane().add(BorderLayout.NORTH, menu);
@@ -31,8 +37,6 @@ class Tela{
         cidade.addActionListener(handler);
 
         frame.setVisible(true);
-
-        Cidade[] cidades = {};
-        
     }
 }
+

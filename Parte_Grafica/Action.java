@@ -1,6 +1,5 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JOptionPane;
 
 public class Action implements ActionListener {
@@ -16,5 +15,4 @@ public class Action implements ActionListener {
 	}
 }
 
-//Para salvar o valor estou usando o JOptionPane
-//Cidade Palhoça = new Cidade(descricao, uf, quantidade_de_Estudantes);
+//Para salvar os valores estou usando o JOptionPane
