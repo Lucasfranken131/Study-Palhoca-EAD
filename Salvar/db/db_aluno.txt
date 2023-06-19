@@ -1,0 +1,4 @@
+0, nome do aluno, 22/22/2222, exemplo@gmail.com, 12345678, Teste
+1, nome do aluno, 22/22/2222, exemplo@gmail.com, 12345678, Teste
+2, nome do aluno, 22/22/2222, exemplo@gmail.com, 12345678, Teste
+3, a, a, a, a, a
