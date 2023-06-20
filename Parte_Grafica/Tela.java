@@ -9,16 +9,24 @@ import java.util.Arrays;
 class Tela extends JFrame{
     private static JTable table;
     private static DefaultTableModel tableModel;
+    private static JFrame frame = new JFrame("Study Palhoça EAD.");
 
-    public static void criar_tabela(){
-
-
-        // Exemplo de adição de linhas à tabela
-        mostrarAluno();
-
+    public static void excluir_tabela(){
+        try{
+            table.removeAll();
+        }catch (Exception e){}
     }
     private static void mostrarAluno() {
         // Cria um array com os dados da linha
+        excluir_tabela();
+        tableModel = new DefaultTableModel(new Object[]{"ID","Nome","Nascimento","Email","Senha","Cidade"}, 0);
+        table = new JTable(tableModel);
+
+        // Adiciona uma barra de rolagem à tabela
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        // Adiciona o scrollPane ao JFrame
+        frame.add(scrollPane);
         String alunos=Salvar_aluno.pegar_conteudo();
 
         String[] array = alunos.split("\n");
@@ -31,9 +39,32 @@ class Tela extends JFrame{
 
     }
 
+    private static void mostrarCidade(){
+        excluir_tabela();
+        tableModel = new DefaultTableModel(new Object[]{"ID", "Cidade","Estado"}, 0);
+        table = new JTable(tableModel);
+
+        // Adiciona uma barra de rolagem à tabela
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        // Adiciona o scrollPane ao JFrame
+        frame.add(scrollPane);
+        String alunos=Salvar_cidade.pegar_conteudo();
+
+        String[] array = alunos.split("\n");
+        for (int i =0;i<array.length;i++) {
+
+            String[] ar=array[i].split(",");
+            Object[] mostrar={ar[0],ar[1],ar[2]};
+            tableModel.addRow(mostrar);
+        }
+    }
+
+
+
     public static void main(String[] args) {
         //Criação da tela
-        JFrame frame = new JFrame("Study Palhoça EAD.");
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,500);
         
@@ -69,10 +100,12 @@ class Tela extends JFrame{
                if (pesquisaTexto.getText().equals("Nome da ")){
                     pesquisaTexto.setText("Nome do ");
                     pesquisaSeleciona.setText("Estudante");
+                    mostrarAluno();
                }
                else{
                     pesquisaTexto.setText("Nome da ");
                     pesquisaSeleciona.setText("Cidade");
+                    mostrarCidade();
                }
             }
         });
@@ -100,16 +133,9 @@ class Tela extends JFrame{
 
 
 
-        tableModel = new DefaultTableModel(new Object[]{"ID","Nome","Nascimento","Email","Senha","Cidade"}, 0);
-        table = new JTable(tableModel);
 
-        // Adiciona uma barra de rolagem à tabela
-        JScrollPane scrollPane = new JScrollPane(table);
 
-        // Adiciona o scrollPane ao JFrame
-        frame.add(scrollPane);
 
-        criar_tabela();
         //Deixa a tela vísivel
         frame.setVisible(true);
     }
