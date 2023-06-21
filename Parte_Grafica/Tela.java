@@ -1,5 +1,8 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -21,6 +24,9 @@ class Tela extends JFrame{
         excluir_tabela();
         tableModel = new DefaultTableModel(new Object[]{"ID","Nome","Nascimento","Email","Senha","Cidade"}, 0);
         table = new JTable(tableModel);
+        //O sort das linhas
+        final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
+        table.setRowSorter(sorter);
 
         // Adiciona uma barra de rolagem à tabela
         JScrollPane scrollPane = new JScrollPane(table);
@@ -43,6 +49,10 @@ class Tela extends JFrame{
         excluir_tabela();
         tableModel = new DefaultTableModel(new Object[]{"ID", "Cidade","Estado"}, 0);
         table = new JTable(tableModel);
+        //O sort das linhas
+        final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
+        table.setRowSorter(sorter);
+
 
         // Adiciona uma barra de rolagem à tabela
         JScrollPane scrollPane = new JScrollPane(table);
@@ -59,8 +69,6 @@ class Tela extends JFrame{
             tableModel.addRow(mostrar);
         }
     }
-
-
 
     public static void main(String[] args) {
         //Criação da tela
@@ -118,8 +126,19 @@ class Tela extends JFrame{
         footer.add(barraPesquisa);
         footer.add(pesquisaButton);
 
+        //Barras brancas dos lados
+        JMenuBar bar = new JMenuBar();
+        JLabel texto = new JLabel("            ");
+        bar.add(texto);
+
+        JMenuBar bar2 = new JMenuBar();
+        JLabel texto2 = new JLabel("            ");
+        bar2.add(texto2);
+
         //Posicionamento do header e footer
         frame.getContentPane().add(BorderLayout.NORTH, header);
+        frame.getContentPane().add(BorderLayout.WEST, bar);
+        frame.getContentPane().add(BorderLayout.EAST, bar2);
         frame.getContentPane().add(BorderLayout.SOUTH, footer);
 
         //Evento para Inserir uma cidade, leva para o arquivo CriarCidade.java
@@ -130,17 +149,11 @@ class Tela extends JFrame{
         ActionListener handler_estudante = new CriarEstudante();
         aluno.addActionListener(handler_estudante);
 
-
-
-
-
-
-
-        //Deixa a tela vísivel
+        //Deixa em tela cheia e vísivel
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        frame.setUndecorated(true);
         frame.setVisible(true);
     }
-
-
-    }
+}
 
 
