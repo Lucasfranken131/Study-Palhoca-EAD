@@ -3,6 +3,6 @@
 Vou mandar a real, não sei como vamos fazer a array do objeto 😭 <br>
 deixa, eu tinha esquecido que vamos fazer um BD 😜 <br>
 Já ta arrumado, exclui e botei dnv 🤠<br>
-O <p style="color: red;">Cadu</p> apagou uns imports que faziam o programa funcionar de forma correta. <br>
+O <div style="color:red;">Cadu</div> apagou uns imports que faziam o programa funcionar de forma correta. <br>
 Coloquei de Volta
 
