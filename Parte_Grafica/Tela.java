@@ -52,10 +52,6 @@ class Tela extends JFrame{
         excluir_tabela();
         tableModel = new DefaultTableModel(new Object[]{"ID", "Cidade","Estado"}, 0);
         table = new JTable(tableModel);
-        //O sort das linhas
-        final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
-        table.setRowSorter(sorter);
-
 
         // Adiciona uma barra de rolagem à tabela
         JScrollPane scrollPane = new JScrollPane(table);
