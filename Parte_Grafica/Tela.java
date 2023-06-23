@@ -6,6 +6,9 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Array;
 import java.util.Arrays;
 
@@ -181,7 +184,6 @@ class Tela extends JFrame{
 
         //Deixa em tela cheia e vísivel
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        frame.setUndecorated(true);
         frame.setVisible(true);
           });
     }
