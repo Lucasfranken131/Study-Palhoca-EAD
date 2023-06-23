@@ -69,8 +69,31 @@ class Tela extends JFrame{
             tableModel.addRow(mostrar);
         }
     }
+    public static  void salvarAlteracoes() {
+    	// Ao mexer diretamente na tabela ele ja ira alterar as informacoes
+        try {
+            FileWriter arquivoEscrita = new FileWriter("Salvar/db/db_aluno.txt");
+            BufferedWriter escritor = new BufferedWriter(arquivoEscrita);
+
+            // Percorre todas as linhas da tabela e salva os dados no arquivo
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                Object[] rowData = new Object[tableModel.getColumnCount()];
+                for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                    rowData[j] = tableModel.getValueAt(i, j);
+                }
+                String linha = String.join(",", Arrays.copyOf(rowData, rowData.length, String[].class));
+                escritor.write(linha);
+                escritor.newLine();
+            }
+
+            escritor.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
         //Criação da tela
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,6 +149,13 @@ class Tela extends JFrame{
         footer.add(barraPesquisa);
         footer.add(pesquisaButton);
 
+        JButton salvarButton = new JButton("Salvar");
+        salvarButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent ae) {
+                salvarAlteracoes();
+        }});
+        footer.add(salvarButton);
+
         //Barras brancas dos lados
         JMenuBar bar = new JMenuBar();
         JLabel texto = new JLabel("            ");
@@ -153,6 +183,7 @@ class Tela extends JFrame{
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         frame.setUndecorated(true);
         frame.setVisible(true);
+          });
     }
 }
 
