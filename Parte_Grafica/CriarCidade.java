@@ -10,7 +10,9 @@ public class CriarCidade implements ActionListener {
         //Criação do objeto.
         String[] array = {Salvar_cidade.pegar_cod(),nome,uf};
 
+
         Salvar_cidade.salvar(array);
+
 	}
 }
 

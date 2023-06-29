@@ -4,100 +4,227 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Array;
 import java.util.Arrays;
 
 class Tela extends JFrame{
-    private static JTable table;
-    private static DefaultTableModel tableModel;
-    private static JFrame frame = new JFrame("Study Palhoça EAD.");
-
-    public static void excluir_tabela(){
-        try{
-            table.removeAll();
-        }catch (Exception e){}
+    static Boolean MostrandoAluno;
+    private static final JFrame frame = new JFrame("Study Palhoça EAD.");
+    static JTextField barraPesquisa = new JTextField(20);
+    private static JPanel panel;
+    private static JTable tabela;
+    public static void remover(){
+        panel.remove(new JScrollPane(tabela));//remove a tabela do painel
+        frame.remove(panel);//remove o painel do frame
+        frame.revalidate(); // Atualizar o JPanel
+        frame.repaint(); // Atualiza o frame, sem o .revalidate e o .repaint juntos não funciona
     }
-    private static void mostrarAluno() {
-        // Cria um array com os dados da linha
-        excluir_tabela();
-        tableModel = new DefaultTableModel(new Object[]{"ID","Nome","Nascimento","Email","Senha","Cidade"}, 0);
-        table = new JTable(tableModel);
-        //O sort das linhas
-        final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
-        table.setRowSorter(sorter);
-
-        // Adiciona uma barra de rolagem à tabela
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        // Adiciona o scrollPane ao JFrame
-        frame.add(scrollPane);
+    //Mostra os alunos
+    public static void MostrarAluno(){
+        panel = new JPanel(new BorderLayout());
         String alunos=Salvar_aluno.pegar_conteudo();
 
         String[] array = alunos.split("\n");
-        for (int i =0;i<array.length;i++) {
-
+        //Matriz com quantidade de linha variável
+        Object[][] dados = new Object[array.length][6];
+        //Lógica para salvar na matriz os dados dos alunos
+        for (int i = 0; i < array.length; i++) {
             String[] ar=array[i].split(",");
-            Object[] mostrar={ar[0],ar[1],ar[2],ar[3],ar[4],ar[5]};
-            tableModel.addRow(mostrar);
+            for (int j = 0; j < 6; j++) {
+                dados[i][j]= ar[j];
+            }
         }
-
+        //Nome das tabelas
+        String[] colunas = {"ID","Nome","Nascimento","Email","Senha","Cidade"};
+        //Adiciona os dados na tabela
+        tabela = new JTable(dados, colunas);
+        //Configurações para a tabela funcionar
+        panel.add(new JScrollPane(tabela), BorderLayout.CENTER);
+        frame.add(panel);
+        frame.revalidate(); // Atualizar o JPanel
+        frame.repaint();
     }
-
-    private static void mostrarCidade(){
-        excluir_tabela();
-        tableModel = new DefaultTableModel(new Object[]{"ID", "Cidade","Estado"}, 0);
-        table = new JTable(tableModel);
-
-        // Adiciona uma barra de rolagem à tabela
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        // Adiciona o scrollPane ao JFrame
-        frame.add(scrollPane);
+    //Mostra as cidades
+    public static void MostrarCidade(){
+        panel = new JPanel(new BorderLayout());
         String alunos=Salvar_cidade.pegar_conteudo();
 
         String[] array = alunos.split("\n");
-        for (int i =0;i<array.length;i++) {
 
+        //Matriz com quantidade de linha variável
+        Object[][] dados = new Object[array.length][3];
+
+        //Lógica para salvar na matriz os dados das cidades
+        for (int i = 0; i < array.length; i++) {
             String[] ar=array[i].split(",");
-            Object[] mostrar={ar[0],ar[1],ar[2]};
-            tableModel.addRow(mostrar);
-        }
-    }
-    public static  void salvarAlteracoes() {
-    	// Ao mexer diretamente na tabela ele ja ira alterar as informacoes
-        try {
-            FileWriter arquivoEscrita = new FileWriter("Salvar/db/db_aluno.txt");
-            BufferedWriter escritor = new BufferedWriter(arquivoEscrita);
-
-            // Percorre todas as linhas da tabela e salva os dados no arquivo
-            for (int i = 0; i < tableModel.getRowCount(); i++) {
-                Object[] rowData = new Object[tableModel.getColumnCount()];
-                for (int j = 0; j < tableModel.getColumnCount(); j++) {
-                    rowData[j] = tableModel.getValueAt(i, j);
-                }
-                String linha = String.join(",", Arrays.copyOf(rowData, rowData.length, String[].class));
-                escritor.write(linha);
-                escritor.newLine();
+            for (int j = 0; j < 3; j++) {
+                dados[i][j]= ar[j];
             }
-
-            escritor.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        //Nome das tabelas
+        String[] colunas = {"id", "cidade","estado"};
+        //Adiciona os dados na tabela
+        tabela = new JTable(dados, colunas);
+        //Configurações para a tabela funcionar
+        panel.add(new JScrollPane(tabela), BorderLayout.CENTER);
+        frame.add(panel);
+        frame.revalidate(); // Atualizar o JPanel
+        frame.repaint();
     }
 
+
+
+//    public static  void salvarAlteracoes() {
+//    	// Ao mexer diretamente na tabela ele ja ira alterar as informacoes
+//        try {
+//            FileWriter arquivoEscrita = new FileWriter("Salvar/db/db_aluno.txt");
+//            BufferedWriter escritor = new BufferedWriter(arquivoEscrita);
+//
+//            // Percorre todas as linhas da tabela e salva os dados no arquivo
+//            for (int i = 0; i < tableModel.getRowCount(); i++) {
+//                Object[] rowData = new Object[tableModel.getColumnCount()];
+//                for (int j = 0; j < tableModel.getColumnCount(); j++) {
+//                    rowData[j] = tableModel.getValueAt(i, j);
+//                }
+//                String linha = String.join(",", Arrays.copyOf(rowData, rowData.length, String[].class));
+//                escritor.write(linha);
+//                escritor.newLine();
+//            }
+//
+//            escritor.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    public static void MostrarCidadePesquisada(String cidades){
+        //Caso a resposta venha vazia, mostra todas as cidades e trava a função
+        if(cidades.isEmpty()){
+            remover();
+            MostrarCidade();
+            return;
+        }
+        //Remove oque está na tabela para ser reescrita
+        remover();
+        panel = new JPanel(new BorderLayout());
+        String[] array = cidades.split("\n");
+
+        //Lógica para mostrar as cidades correspondentes a pesquisa
+
+        Object[][] dados = new Object[array.length][3];
+
+        for (int i = 0; i < array.length; i++) {
+            String[] ar=array[i].split(",");
+            for (int j = 0; j < 3; j++) {
+                dados[i][j]= ar[j];
+            }
+        }
+        // Configurar a tabela
+        String[] colunas = {"id", "cidade","estado"};
+        tabela = new JTable(dados, colunas);
+        panel.add(new JScrollPane(tabela), BorderLayout.CENTER);
+        frame.add(panel);
+        frame.revalidate(); // Atualizar o JPanel
+        frame.repaint();
+    }
+    public static void MostrarAlunoPesquisado(String alunos){
+        //Caso a resposta venha vazia, mostra todos os alunos e trava a função
+        if(alunos.isEmpty()){
+            remover();
+            MostrarAluno();
+            return;
+        }
+        //Remove oque está na tabela para ser reescrita
+        remover();
+        panel = new JPanel(new BorderLayout());
+
+        //Lógica para mostrar os alunos correspondentes a pesquisa
+        String[] array = alunos.split("\n");
+        Object[][] dados = new Object[array.length][6];
+
+        for (int i = 0; i < array.length; i++) {
+            String[] ar=array[i].split(",");
+            for (int j = 0; j < 6; j++) {
+                dados[i][j]= ar[j];
+            }
+        }
+
+        // Configurar a tabela
+        String[] colunas = {"ID","Nome","Nascimento","Email","Senha","Cidade"};
+        tabela = new JTable(dados, colunas);
+        panel.add(new JScrollPane(tabela), BorderLayout.CENTER);
+        frame.add(panel);
+        frame.revalidate(); // Atualizar o JPanel
+        frame.repaint();
+    }
+
+    //Está como return Object ,pois estava com bugs apenas com o void ,motivo desconhecido.
+    public static Object pesquisar(){
+        //Pega oque foi digitado
+        String pesquisando = barraPesquisa.getText();
+        String[] pesquisa = pesquisando.split("");
+        //Caso nao seja os alunos que estão na tela, entra nesse if
+        if(!MostrandoAluno){
+            String cidades_mostrar="";
+            //Pega o conteúdo das cidades
+            String[] cidades = Salvar_cidade.pegar_conteudo().split("\n");
+            //Lógica para testar se oque foi digitado é igual o nome das cidades existentes
+            for(int i=0;i<cidades.length;i++){
+                String[] cidade=cidades[i].split(",");
+                String[] nome_cidade=cidade[1].split("");
+                boolean igual=true;
+                for(int j =0;j<pesquisa.length;j++){
+                    try{
+                        if(nome_cidade[j]!=null && pesquisa[j].equalsIgnoreCase(nome_cidade[j]) && igual){
+                        }else{
+                            igual=false;
+                        }
+                    }catch (Exception e){}
+                }
+                if(igual){
+                    //Caso oque foi digitado e o nome da cidade seja igual, o conteúdo é pego e salvo
+                    cidades_mostrar+=Salvar_cidade.buscar_cidade_por_codigo(cidade[0])+"\n";
+                }
+            }
+            //Roda a função para mostrar na tela
+            MostrarCidadePesquisada(cidades_mostrar);
+
+        }else{
+            //Caso seja os alunos que estão na tela, roda esta parte.
+            //Igual a parte da cidade ,porém com pequenas mudanças por conta do conteúdo e
+            //tamanho da tabela
+            String alunos_mostrar="";
+            String[] alunos = Salvar_aluno.pegar_conteudo().split("\n");
+            for(int i=0;i<alunos.length;i++){
+                String[] aluno=alunos[i].split(",");
+                String[] nome_aluno=aluno[1].split("");
+                boolean igual=true;
+                for(int j =0;j<pesquisa.length;j++){
+                    try{
+                        if(nome_aluno[j]!=null && pesquisa[j].equalsIgnoreCase(nome_aluno[j]) && igual){
+                            System.out.println(Arrays.toString(aluno));
+                        }else{
+                            igual=false;
+                        }
+                    }catch (Exception e){}
+                }
+                if(igual){
+                    System.out.println(aluno[0]);
+                    alunos_mostrar+=Salvar_aluno.buscar_estudante_por_codigo(aluno[0])+"\n";
+                }
+            }
+            MostrarAlunoPesquisado(alunos_mostrar);
+        }
+        return null;
+    }
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
         //Criação da tela
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,500);
-        
+
         //Seleção do ícone da tela.
         ImageIcon image = new ImageIcon("EAD.png");
         frame.setIconImage(image.getImage());
@@ -118,40 +245,56 @@ class Tela extends JFrame{
         editar.add(cidade_editar);
         editar.add(aluno_editar);
 
-        //Footer e itens do footer  
+        //Footer e itens do footer
         JMenuBar footer = new JMenuBar();
-        JLabel pesquisaTexto = new JLabel("Nome da ");
-        JButton pesquisaSeleciona = new JButton("Cidade");
-        
+        JLabel pesquisaTexto = new JLabel("Nome do ");
+        JButton pesquisaSeleciona = new JButton("Estudante");
+
         /* Troca o texto do Texto ao lado do botão e do botão, vai servir para escolher se queremos procurar
         um Aluno ou uma Cidade */
-        pesquisaSeleciona.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-               if (pesquisaTexto.getText().equals("Nome da ")){
-                    pesquisaTexto.setText("Nome do ");
-                    pesquisaSeleciona.setText("Estudante");
-                    mostrarAluno();
-               }
-               else{
-                    pesquisaTexto.setText("Nome da ");
-                    pesquisaSeleciona.setText("Cidade");
-                    mostrarCidade();
-               }
-            }
-        });
-        
+            pesquisaSeleciona.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    if (pesquisaTexto.getText().equals("Nome da ")){
+                        pesquisaTexto.setText("Nome do ");
+                        pesquisaSeleciona.setText("Estudante");
+                        //Roda as funções necessárias para mudar para os alunos na tela
+                        MostrandoAluno=true;
+                        remover();
+                        MostrarAluno();
+
+                    }
+                    else{
+                        pesquisaTexto.setText("Nome da ");
+                        pesquisaSeleciona.setText("Cidade");
+                        //Roda as funções necessárias para mudar para as cidades na tela
+                        MostrandoAluno=false;
+                        remover();
+                        MostrarCidade();
+
+
+                    }
+                }
+            });
+
         //Ainda é os itens do footer
         footer.add(pesquisaTexto);
         footer.add(pesquisaSeleciona);
-        JTextField barraPesquisa = new JTextField(20);
-        JButton pesquisaButton = new JButton("Pesquisar");
+        //Adiciona uma KeyListener para cada tecla pressionada na barra de pesquisa
+            // Precisa ser o KeyRealesed, pois só assim roda a função após a tecla estar na barra
+        barraPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                //Função que irá pesquisar
+                pesquisar();
+            }
+        });
+        //JButton pesquisaButton = new JButton("Pesquisar");
         footer.add(barraPesquisa);
-        footer.add(pesquisaButton);
+        //footer.add(pesquisaButton);
 
         JButton salvarButton = new JButton("Salvar");
         salvarButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent ae) {
-                salvarAlteracoes();
+                //salvarAlteracoes();
         }});
         footer.add(salvarButton);
 
@@ -178,11 +321,15 @@ class Tela extends JFrame{
         ActionListener handler_estudante = new CriarEstudante();
         aluno.addActionListener(handler_estudante);
 
+        //Mostrar a tabela alunos assim que inicia
+        MostrarAluno();
+        //Salva que está mostrando os alunos
+        MostrandoAluno=true;
+
+
         //Deixa em tela cheia e vísivel
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
           });
     }
 }
-
-
