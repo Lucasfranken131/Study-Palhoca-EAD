@@ -1,2 +1,7 @@
-0, palhoca, sc
-[1, macaco, banana]
+0,palhoca, sc
+[1,macaco, banana]
+2,sao jose,sc
+3,testando,sc
+4,2134,est
+5,12,4
+6,palhocinha,sc

@@ -63,6 +63,7 @@ public class Salvar_aluno {
         try {
             String novo_aluno = novo[0] + "," + novo[1] + "," + novo[2] + "," + novo[3] + "," + novo[4] + "," + novo[5];
             String conteudo = pegar_conteudo();
+            System.out.println(novo_aluno);
 
             // Verifica se o aluno já existe no arquivo
             if (conteudo.contains(novo[0] + ",")) {
@@ -86,6 +87,7 @@ public class Salvar_aluno {
             BufferedWriter escritor = new BufferedWriter(arquivoEscrita);
             escritor.write(conteudo);
             escritor.close();
+            System.out.println("salvo");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,7 +127,6 @@ public class Salvar_aluno {
                     return linha;
                 }
             }
-
             reader.close();
             return null; // Estudante não encontrado
         } catch (IOException e) {
