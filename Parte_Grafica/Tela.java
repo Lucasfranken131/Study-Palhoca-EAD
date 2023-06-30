@@ -16,6 +16,7 @@ class Tela extends JFrame{
     static JTextField barraPesquisa = new JTextField(20);
     private static JPanel panel;
     private static JTable tabela;
+    private static boolean salvarAluno;
     public static void remover(){
         panel.remove(new JScrollPane(tabela));//remove a tabela do painel
         frame.remove(panel);//remove o painel do frame
@@ -80,8 +81,16 @@ class Tela extends JFrame{
 //    public static  void salvarAlteracoes() {
 //    	// Ao mexer diretamente na tabela ele ja ira alterar as informacoes
 //        try {
-//            FileWriter arquivoEscrita = new FileWriter("Salvar/db/db_aluno.txt");
-//            BufferedWriter escritor = new BufferedWriter(arquivoEscrita);
+//           FileWriter arquivoEscrita;
+//           BufferedWriter escritor;
+//
+//            if (salvarAluno) {
+//                arquivoEscrita = new FileWriter("E:\\Study-Palhoca-EAD-main\\Salvar\\db\\db_aluno.txt");
+            // } else {
+            //     arquivoEscrita = new FileWriter("E:\\Study-Palhoca-EAD-main\\Salvar\\db\\db_cidade.txt");
+            // }
+
+            // escritor = new BufferedWriter(arquivoEscrita);
 //
 //            // Percorre todas as linhas da tabela e salva os dados no arquivo
 //            for (int i = 0; i < tableModel.getRowCount(); i++) {
@@ -261,6 +270,7 @@ class Tela extends JFrame{
                         MostrandoAluno=true;
                         remover();
                         MostrarAluno();
+                        salvarAluno = true;
 
                     }
                     else{
@@ -270,6 +280,7 @@ class Tela extends JFrame{
                         MostrandoAluno=false;
                         remover();
                         MostrarCidade();
+                        salvarAluno = false;
 
 
                     }
