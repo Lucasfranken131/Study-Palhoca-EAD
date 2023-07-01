@@ -84,9 +84,9 @@ class Tela extends JFrame{
             BufferedWriter escritor;
 
             if (salvarAluno) {
-                arquivoEscrita = new FileWriter("E:\\Study-Palhoca-EAD-main\\Salvar\\db\\db_aluno.txt");
+                arquivoEscrita = new FileWriter("Salvar/db/db_aluno.txt");
             } else {
-                arquivoEscrita = new FileWriter("E:\\Study-Palhoca-EAD-main\\Salvar\\db\\db_cidade.txt");
+                arquivoEscrita = new FileWriter("Salvar/db/db_cidade.txt");
             }
 
             escritor = new BufferedWriter(arquivoEscrita);
