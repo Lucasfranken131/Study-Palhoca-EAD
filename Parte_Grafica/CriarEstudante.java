@@ -5,6 +5,8 @@ import javax.swing.JOptionPane;
 
 public class CriarEstudante implements ActionListener {
     public void actionPerformed(ActionEvent ActionEvent) {
+	String[] opcoes = {"Sim", "Não"};
+    	String alunoBolsista;
         //Aqui pega os valores para a classe Estudante
 		//String codigo = JOptionPane.showInputDialog("Insira o Código do estudante");
         //int id_codigo = Integer.parseInt(codigo);
@@ -13,8 +15,8 @@ public class CriarEstudante implements ActionListener {
         String email = JOptionPane.showInputDialog("Insira o email do estudante:");
         String senha = JOptionPane.showInputDialog("Insira a senha do estudante:");
         String[] cidades= Salvar_cidade.pegar_conteudo().split("\n");
-        String cidade_nome="";
-
+        String cidade_nome=""; 
+	
         for (int i =0;i<cidades.length;i++) {
             cidade_nome += cidades[i].split(",")[1]+",";
         }
@@ -29,9 +31,16 @@ public class CriarEstudante implements ActionListener {
 
         System.out.println(x);
 
+	int escolha = JOptionPane.showOptionDialog(null, "O aluno é Bolsista?", "Aluno Bolsista", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+
+        if (escolha == 0) {
+        	alunoBolsista = "Sim";
+        }else alunoBolsista = "Não";
+
+
         String codigo= Salvar_aluno.pegar_cod();
         System.out.println(codigo);
-        String [] array={codigo,nome,dataNascimento,email,senha,options[x]};
+        String [] array={codigo,nome,dataNascimento,email,senha,options[x],alunoBolsista};
 
 
 
