@@ -12,8 +12,9 @@ public class Salvar_aluno {
          String email="exemplo@gmail.com";
          String senha="12345678";
          String cidade="Teste";
+         String alunoBolsista = "Não";
         //tem que ser enviado em formato de array
-         String [] array={codigo,nome,dataNascimento,email,senha,cidade};
+         String [] array={codigo,nome,dataNascimento,email,senha,cidade,alunoBolsista};
 
         salvar(array);
     }
@@ -61,7 +62,7 @@ public class Salvar_aluno {
     // }
     public static void salvar(String[] novo) {
         try {
-            String novo_aluno = novo[0] + "," + novo[1] + "," + novo[2] + "," + novo[3] + "," + novo[4] + "," + novo[5];
+            String novo_aluno = novo[0] + "," + novo[1] + "," + novo[2] + "," + novo[3] + "," + novo[4] + "," + novo[5], + "," + novo[6];
             String conteudo = pegar_conteudo();
             System.out.println(novo_aluno);
 
