@@ -46,20 +46,10 @@ public class CriarEstudante implements ActionListener {
 
         Salvar_aluno.salvar(array);
 
+	JOptionPane.showMessageDialog(null, "Estudante Criado com sucesso!");
 
 
-
-
-
-
-
-
-
-
-
-
-
-        //Fazer essa parte depois :p
+ //Fazer essa parte depois :p
         //Cidade cidade = JOptionPane.showInputDialog("Insira o estado:");
         //Criação do objeto.
         //Estudante estudante_objeto = new Estudante(codigo, nome, dataNascimento, email, senha, cidade); 
