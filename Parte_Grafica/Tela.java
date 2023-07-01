@@ -16,7 +16,7 @@ class Tela extends JFrame{
     static JTextField barraPesquisa = new JTextField(20);
     private static JPanel panel;
     private static JTable tabela;
-    private static boolean salvarAluno;
+    private static boolean salvarAluno = true;
     public static void remover(){
         panel.remove(new JScrollPane(tabela));//remove a tabela do painel
         frame.remove(panel);//remove o painel do frame
@@ -30,16 +30,16 @@ class Tela extends JFrame{
 
         String[] array = alunos.split("\n");
         //Matriz com quantidade de linha variável
-        Object[][] dados = new Object[array.length][6];
+        Object[][] dados = new Object[array.length][7];
         //Lógica para salvar na matriz os dados dos alunos
         for (int i = 0; i < array.length; i++) {
             String[] ar=array[i].split(",");
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < 7; j++) {
                 dados[i][j]= ar[j];
             }
         }
         //Nome das tabelas
-        String[] colunas = {"ID","Nome","Nascimento","Email","Senha","Cidade"};
+        String[] colunas = {"ID","Nome","Nascimento","Email","Senha","Cidade","Bolsista"};
         //Adiciona os dados na tabela
         tabela = new JTable(dados, colunas);
         //Configurações para a tabela funcionar
@@ -78,36 +78,38 @@ class Tela extends JFrame{
 
 
 
-//    public static  void salvarAlteracoes() {
-//    	// Ao mexer diretamente na tabela ele ja ira alterar as informacoes
-//        try {
-//           FileWriter arquivoEscrita;
-//           BufferedWriter escritor;
-//
-//            if (salvarAluno) {
-//                arquivoEscrita = new FileWriter("E:\\Study-Palhoca-EAD-main\\Salvar\\db\\db_aluno.txt");
-            // } else {
-            //     arquivoEscrita = new FileWriter("E:\\Study-Palhoca-EAD-main\\Salvar\\db\\db_cidade.txt");
-            // }
+    public static void salvarAlteracoes() {
+        try {
+            FileWriter arquivoEscrita;
+            BufferedWriter escritor;
 
-            // escritor = new BufferedWriter(arquivoEscrita);
-//
-//            // Percorre todas as linhas da tabela e salva os dados no arquivo
-//            for (int i = 0; i < tableModel.getRowCount(); i++) {
-//                Object[] rowData = new Object[tableModel.getColumnCount()];
-//                for (int j = 0; j < tableModel.getColumnCount(); j++) {
-//                    rowData[j] = tableModel.getValueAt(i, j);
-//                }
-//                String linha = String.join(",", Arrays.copyOf(rowData, rowData.length, String[].class));
-//                escritor.write(linha);
-//                escritor.newLine();
-//            }
-//
-//            escritor.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+            if (salvarAluno) {
+                arquivoEscrita = new FileWriter("E:\\Study-Palhoca-EAD-main\\Salvar\\db\\db_aluno.txt");
+            } else {
+                arquivoEscrita = new FileWriter("E:\\Study-Palhoca-EAD-main\\Salvar\\db\\db_cidade.txt");
+            }
+
+            escritor = new BufferedWriter(arquivoEscrita);
+
+            // Obtém o modelo da tabela atual
+            TableModel tableModel = tabela.getModel();
+
+            // Percorre todas as linhas da tabela e salva os dados no arquivo
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                Object[] rowData = new Object[tableModel.getColumnCount()];
+                for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                    rowData[j] = tableModel.getValueAt(i, j);
+                }
+                String linha = String.join(",", Arrays.copyOf(rowData, rowData.length, String[].class));
+                escritor.write(linha);
+                escritor.newLine();
+            }
+
+            escritor.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static void MostrarCidadePesquisada(String cidades){
         //Caso a resposta venha vazia, mostra todas as cidades e trava a função
         if(cidades.isEmpty()){
@@ -151,17 +153,17 @@ class Tela extends JFrame{
 
         //Lógica para mostrar os alunos correspondentes a pesquisa
         String[] array = alunos.split("\n");
-        Object[][] dados = new Object[array.length][6];
+        Object[][] dados = new Object[array.length][7];
 
         for (int i = 0; i < array.length; i++) {
             String[] ar=array[i].split(",");
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < 7; j++) {
                 dados[i][j]= ar[j];
             }
         }
 
         // Configurar a tabela
-        String[] colunas = {"ID","Nome","Nascimento","Email","Senha","Cidade"};
+        String[] colunas = {"ID","Nome","Nascimento","Email","Senha","Cidade","Bolsista"};
         tabela = new JTable(dados, colunas);
         panel.add(new JScrollPane(tabela), BorderLayout.CENTER);
         frame.add(panel);
@@ -215,7 +217,7 @@ class Tela extends JFrame{
                         if(nome_aluno[j]!=null && pesquisa[j].equalsIgnoreCase(nome_aluno[j]) && igual){
                             System.out.println(Arrays.toString(aluno));
                         }else{
-                            igual=false;
+                            igual=false; 
                         }
                     }catch (Exception e){}
                 }
@@ -305,7 +307,7 @@ class Tela extends JFrame{
         JButton salvarButton = new JButton("Salvar");
         salvarButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent ae) {
-                //salvarAlteracoes();
+                salvarAlteracoes();
         }});
         footer.add(salvarButton);
 
@@ -331,6 +333,14 @@ class Tela extends JFrame{
         //Evento para Inserir um aluno, leva para CriarEstudante.java
         ActionListener handler_estudante = new CriarEstudante();
         aluno.addActionListener(handler_estudante);
+        
+        //Evento para Inserir uma cidade, leva para o arquivo CriarCidade.java
+        ActionListener editar_cidade = new EditarEstudante();
+        cidade_editar.addActionListener(editar_cidade);
+
+        //Evento para Inserir um aluno, leva para CriarEstudante.java
+        ActionListener editar_estudante = new EditarEstudante();
+        aluno_editar.addActionListener(editar_estudante);
 
         //Mostrar a tabela alunos assim que inicia
         MostrarAluno();
