@@ -13,6 +13,7 @@ public class CriarCidade implements ActionListener {
 
         Salvar_cidade.salvar(array);
 
+	JOptionPane.showMessageDialog(null, "Estudante Criado com sucesso!");
 	}
 }
 
