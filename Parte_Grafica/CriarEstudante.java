@@ -3,7 +3,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-public class CriarEstudante implements ActionListener {
+public class CriarEstudante implements ActionListener { 
+   private String[] options;
+
+   public void setOptions(String[] options) {
+	        this.options = options;
+	       }
+	    
+    public String[] getOptions() {
+			return options;
+		}
     public void actionPerformed(ActionEvent ActionEvent) {
 	String[] opcoes = {"Sim", "Não"};
     	String alunoBolsista;
@@ -21,7 +30,12 @@ public class CriarEstudante implements ActionListener {
             cidade_nome += cidades[i].split(",")[1]+",";
         }
 
-
+        //Quando criada uma cidade, criara 4 estudante com ela
+	// if(getOptions() == null || getOptions().length == 0) {
+ //        	options = cidade_nome.split(",");
+ //        }else {
+ //        	setOptions(getOptions());
+ //        }
         String[] options = cidade_nome.split(",");
 
         int x = JOptionPane.showOptionDialog(null, "Em qual cidade o aluno mora?",
