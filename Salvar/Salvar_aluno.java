@@ -62,7 +62,7 @@ public class Salvar_aluno {
     // }
     public static void salvar(String[] novo) {
         try {
-            String novo_aluno = novo[0] + "," + novo[1] + "," + novo[2] + "," + novo[3] + "," + novo[4] + "," + novo[5], + "," + novo[6];
+            String novo_aluno = novo[0] + "," + novo[1] + "," + novo[2] + "," + novo[3] + "," + novo[4] + "," + novo[5] + "," + novo[6];
             String conteudo = pegar_conteudo();
             System.out.println(novo_aluno);
 
