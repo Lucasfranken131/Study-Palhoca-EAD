@@ -43,8 +43,6 @@ public class CriarEstudante implements ActionListener {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
 
-        System.out.println(x);
-
 	int escolha = JOptionPane.showOptionDialog(null, "O aluno é Bolsista?", "Aluno Bolsista", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
 
         if (escolha == 0) {
@@ -53,21 +51,17 @@ public class CriarEstudante implements ActionListener {
 
 
         String codigo= Salvar_aluno.pegar_cod();
-        System.out.println(codigo);
         String [] array={codigo,nome,dataNascimento,email,senha,options[x],alunoBolsista};
-
 
 
         Salvar_aluno.salvar(array);
 
 	JOptionPane.showMessageDialog(null, "Estudante Criado com sucesso!");
 
+    Tela.remover();
+    Tela.MostrarAluno();
+    Tela.MostrandoAluno=true;
 
- //Fazer essa parte depois :p
-        //Cidade cidade = JOptionPane.showInputDialog("Insira o estado:");
-        //Criação do objeto.
-        //Estudante estudante_objeto = new Estudante(codigo, nome, dataNascimento, email, senha, cidade); 
+
 	}
 }
-
-//Para salvar os valores estou usando o JOptionPane

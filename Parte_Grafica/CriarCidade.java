@@ -32,6 +32,10 @@ public class CriarCidade implements ActionListener {
   //           // Chamar o método actionPerformed da instância de CriarEstudante
   //           criarEstudante.actionPerformed(ActionEvent);
   //		}
+
+		Tela.remover();
+		Tela.MostrarCidade();
+		Tela.MostrandoAluno=false;
 	}
 }
 

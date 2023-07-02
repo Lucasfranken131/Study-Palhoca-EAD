@@ -77,7 +77,6 @@ class Tela extends JFrame{
     }
 
 
-
     public static void salvarAlteracoes() {
         try {
             FileWriter arquivoEscrita;
@@ -273,7 +272,6 @@ class Tela extends JFrame{
                         remover();
                         MostrarAluno();
                         salvarAluno = true;
-
                     }
                     else{
                         pesquisaTexto.setText("Nome da ");
@@ -283,8 +281,6 @@ class Tela extends JFrame{
                         remover();
                         MostrarCidade();
                         salvarAluno = false;
-
-
                     }
                 }
             });

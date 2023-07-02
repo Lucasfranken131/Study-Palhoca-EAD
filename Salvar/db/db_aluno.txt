@@ -1,10 +1,3 @@
-0,teste,testando,teste,teste,teste
-1,testando,sei lá, tentando,loucura,ficando maluco
-2,eduardo,11/22/3333,exemplo@gmail,1242342,macaco
-3,eduardo,11/22/33,exemplo@gml,1242,macaco
-4,eduardo,214s,wqe1,445,sao jose
-5,eduardo,wqe,qwtg,dfjh,sao jose
-6,q24312,wert,sgh,234,palhoca
-7,213,saf,hfe,234,sao jose
-8,13,fgd,xc,qw,testando
-9,123,sdgf,234,sg,testando
+0,k,komin,k,k,k,sim
+1,oj9,oj7yf6,´ppkk9jpç,k9jnh8,palhoca,Sim
+2,awga,awg,awh,awh,palhoca,Sim
