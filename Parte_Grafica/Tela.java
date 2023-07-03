@@ -331,7 +331,7 @@ class Tela extends JFrame{
         aluno.addActionListener(handler_estudante);
         
         //Evento para Inserir uma cidade, leva para o arquivo CriarCidade.java
-        ActionListener editar_cidade = new EditarEstudante();
+        ActionListener editar_cidade = new EditarCidade();
         cidade_editar.addActionListener(editar_cidade);
 
         //Evento para Inserir um aluno, leva para CriarEstudante.java
