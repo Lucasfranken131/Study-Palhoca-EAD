@@ -59,5 +59,9 @@ public class EditarEstudante implements ActionListener {
             // Estudante não encontrado
             JOptionPane.showMessageDialog(null, "Estudante não encontrado.");
         }
+        //atualiza a tela mostrando os dados
+        Tela.remover();
+        Tela.MostrarAluno();
+        Tela.MostrandoAluno=true;
     }
 }

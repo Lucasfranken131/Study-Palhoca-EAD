@@ -33,5 +33,9 @@ public class EditarCidade implements ActionListener {
             // Cidade não encontrada
             JOptionPane.showMessageDialog(null, "Cidade não encontrada.");
         }
+        //atualiza a tela com os novos dados
+        Tela.remover();
+		Tela.MostrarCidade();
+		Tela.MostrandoAluno=false;
     }
 }
