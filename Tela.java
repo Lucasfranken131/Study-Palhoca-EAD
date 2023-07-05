@@ -66,7 +66,7 @@ class Tela extends JFrame{
             }
         }
         //Nome das tabelas
-        String[] colunas = {"id", "cidade","estado"};
+        String[] colunas = {"ID", "Cidade","Estado"};
         //Adiciona os dados na tabela
         tabela = new JTable(dados, colunas);
         //Configurações para a tabela funcionar
@@ -132,7 +132,7 @@ class Tela extends JFrame{
             }
         }
         // Configurar a tabela
-        String[] colunas = {"id", "cidade","estado"};
+        String[] colunas = {"ID", "Cidade","Estado"};
         tabela = new JTable(dados, colunas);
         panel.add(new JScrollPane(tabela), BorderLayout.CENTER);
         frame.add(panel);
