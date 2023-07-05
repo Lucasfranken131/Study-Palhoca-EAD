@@ -24,6 +24,7 @@ public class EditarCidade implements ActionListener {
 
             String[] array = {codigo, novoNome, novoUf};
 
+            System.out.print(array);
             Salvar_cidade.salvar(array);
 
           

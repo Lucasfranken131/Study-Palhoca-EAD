@@ -12,7 +12,7 @@ public class Salvar_aluno {
          String email="exemplo@gmail.com";
          String senha="12345678";
          String cidade="Teste";
-         String alunoBolsista = "Não";
+         String alunoBolsista = "Nao";
         //tem que ser enviado em formato de array
          String [] array={codigo,nome,dataNascimento,email,senha,cidade,alunoBolsista};
 
@@ -38,7 +38,46 @@ public class Salvar_aluno {
             return "erro";
         }
     }
-    // public static void salvar(String[] novo){
+ public static void salvar(String[] novo) {
+        try {
+            String nova_cidade = novo[0] + "," + novo[1] + "," + novo[2] + "," + novo[3] + "," + novo[4] + "," + novo[5] + "," + novo[6];
+            String conteudo = pegar_conteudo();
+
+            if (conteudo.contains(novo[0] + ",")) {
+                // O registro já existe, substitui as informações existentes pelas novas
+                String[] linhas = conteudo.split("\n");
+                StringBuilder novoConteudo = new StringBuilder();
+                boolean substituiu = false;
+                for (String linha : linhas) {
+                    if (linha.startsWith(novo[0] + ",")) {
+                        novoConteudo.append(nova_cidade).append("\n");
+                        substituiu = true;
+                    } else {
+                        novoConteudo.append(linha).append("\n");
+                    }
+                }
+
+                if (!substituiu) {
+                    // Se o registro não foi substituído, adiciona as informações ao conteúdo existente
+                    novoConteudo.append(nova_cidade).append("\n");
+                }
+
+                conteudo = novoConteudo.toString();
+            } else {
+                // O registro não existe, adiciona as informações ao conteúdo existente
+                conteudo += nova_cidade + "\n";
+            }
+
+            FileWriter arquivoEscrita = new FileWriter(caminhoArquivo);
+            BufferedWriter escritor = new BufferedWriter(arquivoEscrita);
+            escritor.write(conteudo);
+            escritor.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+   // public static void salvar(String[] novo){
 
     //     try {
     //         //aqui ele vai pegar o conteúdo que já foi salvo, rodando a
@@ -60,39 +99,6 @@ public class Salvar_aluno {
     //         e.printStackTrace();
     //     }
     // }
-    public static void salvar(String[] novo) {
-        try {
-            String novo_aluno = novo[0] + "," + novo[1] + "," + novo[2] + "," + novo[3] + "," + novo[4] + "," + novo[5] + "," + novo[6];
-            String conteudo = pegar_conteudo();
-            System.out.println(novo_aluno);
-
-            // Verifica se o aluno já existe no arquivo
-            if (conteudo.contains(novo[0] + ",")) {
-                // Se o aluno existe, substitui as informações existentes pelas novas
-                String[] linhas = conteudo.split("\n");
-                StringBuilder novoConteudo = new StringBuilder();
-                for (String linha : linhas) {
-                    if (linha.startsWith(novo[0] + ",")) {
-                        novoConteudo.append(novo_aluno).append("\n");
-                    } else {
-                        novoConteudo.append(linha).append("\n");
-                    }
-                }
-                conteudo = novoConteudo.toString();
-            } else {
-                // Se o aluno não existe, adiciona as informações ao conteúdo existente
-                conteudo += novo_aluno + "\n";
-            }
-
-            FileWriter arquivoEscrita = new FileWriter(caminhoArquivo);
-            BufferedWriter escritor = new BufferedWriter(arquivoEscrita);
-            escritor.write(conteudo);
-            escritor.close();
-            System.out.println("salvo");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     //ele apenas vê quantas linhas existe e retorna o número do ID do aluno
     public static String pegar_cod(){

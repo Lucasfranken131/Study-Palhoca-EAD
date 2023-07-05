@@ -61,7 +61,5 @@ public class CriarEstudante implements ActionListener {
     Tela.remover();
     Tela.MostrarAluno();
     Tela.MostrandoAluno=true;
-
-
 	}
 }

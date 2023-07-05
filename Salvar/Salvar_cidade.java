@@ -4,8 +4,6 @@ import java.util.Arrays;
 public class Salvar_cidade {
     static String caminhoArquivo = "Salvar/db/db_cidade.txt";
 
-
-
     public static String pegar_conteudo(){
         try {
             //nesta função, ele tenta ler o conteúdo que está presente no arquivo de texto.
@@ -60,7 +58,6 @@ public class Salvar_cidade {
                 String[] linhas = conteudo.split("\n");
                 StringBuilder novoConteudo = new StringBuilder();
                 boolean substituiu = false;
-
                 for (String linha : linhas) {
                     if (linha.startsWith(novo[0] + ",")) {
                         novoConteudo.append(nova_cidade).append("\n");

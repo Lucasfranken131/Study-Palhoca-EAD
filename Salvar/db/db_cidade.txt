@@ -1,9 +1,15 @@
 0,palhoca, sc
-[1,macaco, banana]
+1,Goiania,Goias
 2,sao jose,sc
 3,testando,sc
 4,2134,est
 5,12,4
 6,palhocinha,sc
 7,palhocity,sc
-8,yvycr5,vl
+8,Palhocita,Parana
+9,null,null
+10,São José,Santa Catarina
+11,Blumenau,Santa Catarina
+12,João,null
+13,Joinville,Santa Catarina
+14,Brasília,DF

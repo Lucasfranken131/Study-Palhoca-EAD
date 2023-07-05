@@ -49,6 +49,7 @@ public class EditarEstudante implements ActionListener {
 
             String[] array = {codigo, novoNome, novaDataNascimento, novoEmail, novaSenha, novaOption[x], novoAlunoBolsista};
 
+            System.out.print(array);
             Salvar_aluno.salvar(array);
 
             // Após salvar as informações atualizadas no arquivo, você pode exibir uma mensagem informando
